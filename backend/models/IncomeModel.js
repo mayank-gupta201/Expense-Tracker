@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const IncomeSchema = new mongoose.Schema({
-    tittle: {
+    title: {
         type: String,
         required: true,
         trim: true,
@@ -10,8 +10,6 @@ const IncomeSchema = new mongoose.Schema({
     amount: {
         type: Number,
         required: true,
-        maxLength: 20,
-        trim: true
     },
     type: {
         type: String,
@@ -20,7 +18,6 @@ const IncomeSchema = new mongoose.Schema({
     date: {
         type: Date,
         required: true,
-        trim: true
     },
     category: {
         type: String,
