@@ -14,6 +14,12 @@ function Dashboard() {
         getExpenses()
     }, [])
 
+
+    const minIncome = incomes.length > 0 ? Math.min(...incomes.map(item => item.amount)) : 0;
+    const maxIncome = incomes.length > 0 ? Math.max(...incomes.map(item => item.amount)) : 0;
+    const minExpense = expenses.length > 0 ? Math.min(...expenses.map(item => item.amount)) : 0;
+    const maxExpense = expenses.length > 0 ? Math.max(...expenses.map(item => item.amount)) : 0;
+
     return (
         <DashboardStyled>
             <InnerLayout>
@@ -44,22 +50,25 @@ function Dashboard() {
                     </div>
                     <div className="history-con">
                         <History />
+                        
                         <h2 className="salary-title">Min <span>Salary</span>Max</h2>
                         <div className="salary-item">
                             <p>
-                                ${incomes.length > 0 ? Math.max(...incomes.map(item => item.amount)) : 0}
+                                ${minIncome} 
                             </p>
                             <p>
-                                ${incomes.length > 0 ? Math.min(...incomes.map(item => item.amount)) : 0}
+                                ${maxIncome} 
                             </p>
                         </div>
+                        
+                        
                         <h2 className="salary-title">Min <span>Expense</span>Max</h2>
                         <div className="salary-item">
                             <p>
-                                ${expenses.length > 0 ? Math.max(...expenses.map(item => item.amount)) : 0}
+                                ${minExpense} 
                             </p>
                             <p>
-                                ${expenses.length > 0 ? Math.min(...expenses.map(item => item.amount)) : 0}
+                                ${maxExpense} 
                             </p>
                         </div>
                     </div>

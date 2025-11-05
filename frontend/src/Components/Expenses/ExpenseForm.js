@@ -24,16 +24,27 @@ function ExpenseForm() {
         setError('')
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault()
-        addExpense(inputState)
-        setInputState({
-            title: '',
-            amount: '',
-            date: '',
-            category: '',
-            description: '',
-        })
+        if (!title || !amount || !category || !date) {
+            setError("All fields are required!");
+            return; 
+        }
+        if (Number(amount) <= 0) {
+            setError("Amount must be a positive number!");
+            return;
+        }
+        const success = await addExpense({...inputState, amount: Number(amount)})
+
+        if(success) {
+            setInputState({
+                title: '',
+                amount: '',
+                date: '',
+                category: '',
+                description: '',
+            })
+        }
     }
 
     return (
@@ -50,7 +61,7 @@ function ExpenseForm() {
             </div>
             <div className="input-control">
                 <input value={amount}  
-                    type="text" 
+                    type="number" 
                     name={'amount'} 
                     placeholder={'Expense Amount'}
                     onChange={handleInput('amount')} 
@@ -64,7 +75,9 @@ function ExpenseForm() {
                     dateFormat="dd/MM/yyyy"
                     onChange={(date) => {
                         setInputState({...inputState, date: date})
+                        setError('')
                     }}
+                    maxDate={new Date()}
                 />
             </div>
             <div className="selects input-control">

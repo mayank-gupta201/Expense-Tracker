@@ -6,7 +6,7 @@ import Form from '../Form/Form';
 import IncomeItem from '../IncomeItem/IncomeItem';
 
 function Income() {
-  const {addIncome, incomes, getIncomes, deleteIncome, totalInocme} = useGlobalContext()
+  const {addIncome, incomes, getIncomes, deleteIncome, totalIncome} = useGlobalContext()
 
   useEffect(() =>{
     getIncomes()
@@ -18,7 +18,7 @@ function Income() {
         <h2>
           Incomes
         </h2>
-        <h2 className='total-income'>Total Income: <span>${totalInocme}</span></h2>
+        <h2 className='total-income'>Total Income: <span>${totalIncome()}</span></h2>
         <div className='income-content'>
           <div className='form-container'>
             <Form />
@@ -55,7 +55,7 @@ const IncomeStyled = styled.div`
         align-items: center;
         background: #FCF6F9;
         border: 2px solid #FFFFFF;
-        box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
+        box-shadow: 0px 1px 15px rgba(7, 218, 21, 0.88);
         border-radius: 20px;
         padding: 1rem;
         margin: 1rem 0;

@@ -8,10 +8,20 @@ require('dotenv').config()
 
 const PORT = process.env.PORT
 
-const frontendURL = 'https://expense-tracker-one-ni-78.vercel.app'; 
+const allowedOrigins = [
+  'https://expense-tracker-one-ni-78.vercel.app', 
+  'http://localhost:3000'                         
+  
+];
 
 const corsOptions = {
-  origin: frontendURL,
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
   optionsSuccessStatus: 200
 };
 

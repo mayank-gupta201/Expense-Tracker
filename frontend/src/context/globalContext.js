@@ -14,51 +14,73 @@ export const GlobalProvider = ({children}) => {
 
     //calculate incomes
     const addIncome = async (income) => {
-        const response = await axios.post(`${BASE_URL}add-income`, income)
-        .catch((err) => {
-            setError(err.response.data.message)
-        })
-        getIncomes()
+        try {
+            await axios.post(`${BASE_URL}add-income`, income)
+            getIncomes()
+            return true;
+        } catch (err) {
+            setError(err.response ? err.response.data.message : "Error adding income");
+            return false;
+        }
     }
 
     const getIncomes = async () => {
-        const response = await axios.get(`${BASE_URL}get-incomes`)
-        setIncomes(response.data)
-        console.log(response.data)
+        try {
+            const response = await axios.get(`${BASE_URL}get-incomes`)
+            setIncomes(response.data)
+            // console.log(response.data)
+        } catch (err) {
+            console.error("getIncomes Error:", err.response ? err.response.data.message : err.message)
+        }
     }
     
     const deleteIncome = async (id) => {
-        const res = await axios.delete(`${BASE_URL}delete-income/${id}`)
-        getIncomes()
+        try{
+            const res = await axios.delete(`${BASE_URL}delete-income/${id}`)
+            getIncomes()
+        }catch(err) {
+            console.error("deleteIncomes Error:", err.response ? err.response.data.message : err.message)
+        }
     }
 
     const totalIncome = () => {
         let totalIncome = 0;
         incomes.forEach((income) => {
-            totalIncome += income.amount
+            totalIncome = totalIncome + income.amount
         })
-
         return totalIncome;
     }
+
     const addExpense = async (expense) => {
-        const response = await axios.post(`${BASE_URL}add-expense`, expense)
-        .catch((err) => {
-            setError(err.response.data.message)
-        })
-        getExpenses()
+        try {
+            await axios.post(`${BASE_URL}add-expense`, expense)
+            getExpenses()
+            return true;
+        } catch (err) {
+            setError(err.response ? err.response.data.message : "Error adding expense");
+            return false;
+        }
     }
 
     const getExpenses = async () => {
-        const response = await axios.get(`${BASE_URL}get-expenses`)
-        setExpenses(response.data)
-        console.log(response.data)
+        try{
+            const response = await axios.get(`${BASE_URL}get-expenses`)
+            setExpenses(response.data)
+            //console.log(response.data)
+        }catch(err){
+            console.error("getExpenses Error:", err.response ? err.response.data.message : err.message)
+        }
     }
     
     const deleteExpense = async (id) => {
-        const res = await axios.delete(`${BASE_URL}delete-expense/${id}`)
-        getExpenses()
+        try{
+            const res = await axios.delete(`${BASE_URL}delete-expense/${id}`)
+            getExpenses()
+    
+        }catch(err){
+            console.error("deleteExpense Error:", err.response ? err.response.data.message : err.message)
+        }
     }
-
     const totalExpenses = () => {
         let totalExpense = 0; 
         expenses.forEach((expense) => {

@@ -11,7 +11,7 @@ function Navigation({active, setActive}) {
         <div className="user-con">
             <img src= {avatar} alt= "" />
             <div className="text">
-              <h2>Mike</h2>
+              <h2>Mayank</h2>
               <p>Your Money</p>
             </div>
         </div>
@@ -28,7 +28,10 @@ function Navigation({active, setActive}) {
           })}
         </ul>
         <div className='botton-nav'>
-          <li>
+          {/* --- FIX: Added onClick to the <li> --- */}
+          <li onClick={() => {
+              console.log("Sign Out Clicked!");
+          }}>
             {signout} Sign Out
           </li>
         </div>
@@ -107,6 +110,35 @@ const NavStyled = styled.nav`
         background: #222260;
         border-radius: 0 10px 10px 0;
       }
+    }
+    .botton-nav {
+        li {
+            /* Same styling as menu-items li */
+            display: grid;
+            grid-template-columns: 40px auto;
+            align-items: center;
+            margin: .6rem 0;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all .4s ease-in-out;
+            color: rgba(34, 34, 96, .6);
+            padding-left: 1rem;
+            position: relative;
+
+            i {
+                color: rgba(34, 34, 96, .6);
+                font-size: 1.4rem;
+                transition: all .4s ease-in-out;
+            }
+
+            /* Hover effect */
+            &:hover {
+                color: rgba(34, 34, 96, 1);
+                i {
+                    color: rgba(34, 34, 96, 1);
+                }
+            }
+        }
     }
 `;
 

@@ -7,7 +7,7 @@ import { plus } from '../../utils/icons';
 import Button from '../Button/Button';
 
 function Form() {
-    const {addIncome, getIncomes, error, setError} = useGlobalContext()
+    const {addIncome, error, setError} = useGlobalContext()
     const [inputState, setInputState] = useState({
         title: '',
         amount: '',
@@ -23,16 +23,30 @@ function Form() {
         setError('')
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault()
-        addIncome({...inputState, amount: Number(amount)})
-        setInputState({
-            title: '',
-            amount: '',
-            date: '',
-            category: '',
-            description: ''
-        })
+        
+        if (!title || !amount || !category || !date) {
+            setError("All fields are required!");
+            return;
+        }
+        if (Number(amount) <= 0) {
+            setError("Amount must be a positive number!");
+            return; 
+        }
+
+        const success = await addIncome({...inputState, amount: Number(amount)})
+        
+        if(success){
+            setInputState({
+                title: '',
+                amount: '',
+                date: '',
+                category: '',
+                description: ''
+            })
+        }
+        
     }
 
   return (
@@ -49,7 +63,7 @@ function Form() {
         </div>
         <div className='input-control'>
             <input 
-                type='text'
+                type='number'
                 value = {amount} 
                 name={'amount'}
                 placeholder='Salary Amount'
@@ -64,7 +78,9 @@ function Form() {
             dateFormat="dd/MM/yyyy"
             onChange={(date) => {
                 setInputState({...inputState, date: date})
+                setError('')
             }}
+            maxDate={new Date()}
         />
         </div>
         <div className='selects input-control'>
@@ -126,7 +142,7 @@ const FormStyled = styled.form`
         &::placeholder{
             color: rgba(34, 34, 96, 0.4);
         }
-        .input0control{
+        .input-control{
             input{
                 width: 100%;
             }

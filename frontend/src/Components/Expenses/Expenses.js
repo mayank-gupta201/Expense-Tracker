@@ -22,9 +22,9 @@ function Expenses() {
                         <ExpenseForm />
                     </div>
                     <div className="incomes">
-                        {expenses.map((income) => {
-                            const {_id, title, amount, date, category, description, type} = income;
-                            console.log(income)
+                        {expenses.map((expense) => {
+                            const {_id, title, amount, date, category, description, type} = expense;
+                            console.log(expense)
                             return <IncomeItem
                                 key={_id}
                                 id={_id} 
@@ -34,7 +34,7 @@ function Expenses() {
                                 date={date} 
                                 type={type}
                                 category={category} 
-                                indicatorColor="var(--color-green)"
+                                indicatorColor="var(--color-red)"
                                 deleteItem={deleteExpense}
                             />
                         })}
@@ -54,7 +54,7 @@ const ExpenseStyled = styled.div`
         align-items: center;
         background: #FCF6F9;
         border: 2px solid #FFFFFF;
-        box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
+        box-shadow: 0px 1px 15px rgba(224, 15, 15, 0.95);
         border-radius: 20px;
         padding: 1rem;
         margin: 1rem 0;
@@ -63,7 +63,7 @@ const ExpenseStyled = styled.div`
         span{
             font-size: 2.5rem;
             font-weight: 800;
-            color: var(--color-green);
+            color: #dd0000;
         }
     }
     .income-content{
