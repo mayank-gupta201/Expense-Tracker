@@ -8,9 +8,17 @@ require('dotenv').config()
 
 const PORT = process.env.PORT
 
+const frontendURL = 'https://expense-tracker-one-ni-78.vercel.app'; 
+
+const corsOptions = {
+  origin: frontendURL,
+  optionsSuccessStatus: 200
+};
+
+
 //middlewares
 app.use(express.json())
-app.use(cors())
+app.use(cors(corsOptions));
 
 //routes
 readdirSync('./routes').map((route) => app.use('/api/v1', require('./routes/' + route)))
