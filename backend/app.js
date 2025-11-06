@@ -9,7 +9,7 @@ require('dotenv').config()
 const PORT = process.env.PORT
 
 const allowedOrigins = [
-  'https://expense-tracker-one-ni-78.vercel.app', 
+  'https://expense-tracker-one-nu-78.vercel.app', 
   'http://localhost:3000'                         
   
 ];
