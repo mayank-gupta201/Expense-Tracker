@@ -9,20 +9,29 @@ require('dotenv').config()
 const PORT = process.env.PORT
 
 const allowedOrigins = [
-  'https://expense-tracker-one-nu-78.vercel.app', 
-  'http://localhost:3000'                         
-  
+    'http://localhost:3000', 
+    /^https:\/\/expense-tracker.*\.vercel\.app$/ 
 ];
 
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  },
-  optionsSuccessStatus: 200
+    origin: function (origin, callback) {
+        if (!origin) return callback(null, true);
+        
+        if (allowedOrigins.some(pattern => {
+            if (typeof pattern === 'string') {
+                return pattern === origin;
+            } else if (pattern instanceof RegExp) {
+                return pattern.test(origin);
+            }
+            return false;
+        })) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    optionsSuccessStatus: 200,
+    credentials: true 
 };
 
 
