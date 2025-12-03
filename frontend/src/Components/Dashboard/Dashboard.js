@@ -54,10 +54,10 @@ function Dashboard() {
                         <h2 className="salary-title">Min <span>Salary</span>Max</h2>
                         <div className="salary-item">
                             <p>
-                                ${minIncome} 
+                                Rs{minIncome} 
                             </p>
                             <p>
-                                ${maxIncome} 
+                                Rs{maxIncome} 
                             </p>
                         </div>
                         
@@ -65,10 +65,10 @@ function Dashboard() {
                         <h2 className="salary-title">Min <span>Expense</span>Max</h2>
                         <div className="salary-item">
                             <p>
-                                ${minExpense} 
+                                Rs{minExpense} 
                             </p>
                             <p>
-                                ${maxExpense} 
+                                Rs{maxExpense} 
                             </p>
                         </div>
                     </div>
